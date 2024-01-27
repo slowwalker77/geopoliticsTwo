@@ -32,7 +32,7 @@ export default function Header() {
         <>
           <div className='mx-auto max-w-7xl px-2 sm:px-6 lg:px-8'>
             <div className='relative flex h-16 items-center justify-between'>
-              <Link className='bg-gray-900 text-xl text-white ml-8'>
+              <Link href ='/' className='bg-gray-900 text-xl text-white ml-8'>
                  <h1>지정학과 세상읽기</h1>
                </Link>
               <div className='absolute inset-y-0 left-0 flex items-center sm:hidden'>
