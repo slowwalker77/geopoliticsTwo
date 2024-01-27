@@ -4,7 +4,7 @@ import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import Image from 'next/image';
-import steem from '../../public/steem.png';
+import steem from '../../public/global.png';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import classNames from '@/services/classNames';
