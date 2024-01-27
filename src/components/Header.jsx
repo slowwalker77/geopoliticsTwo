@@ -45,17 +45,7 @@ export default function Header() {
                 </Disclosure.Button>
               </div>
               <div className='flex flex-1 items-center justify-center sm:items-stretch sm:justify-start'>
-                <div className='flex flex-shrink-0 items-center'>
-                  <Link href='/'>
-                    <Image
-                      src={steem}
-                      width={150}
-                      height={40}
-                      alt='steemit'
-                      priority={false}
-                    />
-                  </Link>
-                </div>
+
                 <div className='hidden sm:ml-6 sm:block'>
                   <div className='flex space-x-4'>
                     <Navbar
@@ -74,10 +64,13 @@ export default function Header() {
                     <Menu.Button className='relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'>
                       <span className='absolute -inset-1.5' />
                       <span className='sr-only'>Open user menu</span>
-                      <img
-                        className='h-8 w-8 rounded-full'
-                        src='/image/profile.png'
-                        alt=''
+                      <Image
+                        className='h-8 w-8'
+                        src={global}
+                        width={150}
+                        height={40}
+                        alt='global'
+                        //priority={false}
                       />
                     </Menu.Button>
                   </div>
