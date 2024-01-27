@@ -20,7 +20,9 @@
     "react-syntax-highlighter": "^15.5.0",
     "remark-gfm": "^4.0.0",
     "remarkable": "^2.0.1",
-    "steem": "^0.7.11"
+    "steem": "^0.7.11",
+    "utf-8-validate": "^6.0.3",
+    "ws": "^8.16.0"
   },
   "devDependencies": {
     "@types/node": "20.10.5",
