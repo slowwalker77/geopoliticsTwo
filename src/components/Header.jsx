@@ -11,10 +11,11 @@ import classNames from '@/services/classNames';
 import ProfileMenu from '@/components/ProfileMenu';
 
 const navigation = [
-  { name: '국내문제', tag: 'section-1' },
-  { name: '국제문제', tag: 'section-2' },
-  { name: '분쟁지역', tag: 'section-3' },
-  { name: '참고', tag: 'section-4' },
+  { name: '국내문제', tag: 'section-0' },
+  { name: '남북관계', tag: 'section-1' },
+  { name: '국제정치', tag: 'section-2' },
+  { name: '지역분쟁', tag: 'section-3' },
+  { name: '참고자료', tag: 'section-4' },
 ];
 
 const profileMenues = [
