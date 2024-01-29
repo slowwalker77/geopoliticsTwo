@@ -15,13 +15,13 @@ export default function MarkDownViewer({ content }) {
           code({ children, className, node, ...rest }) {
             const match = /language-(\w+)/.exec(className || '');
             return match ? (
-              <SyntaxHighlighter
-                {...rest}
-                PreTag='div'
-                children={String(children).replace(/\n$/, '')}
-                language={match[1]}
-                style={materialDark}
-              />
+        <SyntaxHighlighter
+          {...rest}
+            PreTag='div'
+            language={match[1]}
+            style={materialDark}>
+            {String(children).replace(/\n$/, '')}
+            </SyntaxHighlighter>
             ) : (
               <code className={className} {...rest}>
                 {children}
