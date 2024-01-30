@@ -23,7 +23,7 @@ export default function BlogContent({
           }).format(Date.parse(created))}
         </p>
       </div>
-      <h1 className='text-xl font-bold pb-4'>
+      <h1 className='text-2xl font-bold pb-2'>
         {title.replace(/^[^ ]* /, '')}
       </h1>
       <div className='w-44 border-2 border-sky-600 mt-4 mb-4' />
