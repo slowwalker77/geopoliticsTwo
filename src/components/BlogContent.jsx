@@ -3,6 +3,8 @@ import { useRef, useEffect } from 'react';
 import MarkDownViewer from '@/components/MarkDownViewer';
 import { AiTwotoneCalendar } from 'react-icons/ai';
 import selectTitle from '@/services/selectTitle';
+import '@/app/globals.css';
+
 
 export default function BlogContent({
   blog: { title, created, body, author },
@@ -27,7 +29,7 @@ export default function BlogContent({
         {title.replace(/^[^ ]* /, '')}
       </h1>
       <div className='w-44 border-2 border-sky-600 mt-4 mb-4' />
-      <MarkDownViewer content={body} />
+        <MarkDownViewer content={body}/>
     </section>
   );
 }
