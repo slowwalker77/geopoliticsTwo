@@ -130,23 +130,21 @@ export default function BlogList({ tag, sectionTitle, sectionDescription }) {
   return (
     <section>
       <div>
-        <div className='bg-white py-24 sm:py-32'>
+        <div className='bg-white py-16 sm:py-8'>
           <div className='mx-auto max-w-7xl px-6 lg:px-8'>
             <div className='mx-auto max-w-2xl lg:mx-0'>
-              <h2 className='text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
+              <h2 className='text-2xl font-bold tracking-tight text-gray-900 sm:text-2xl'>
                 {sectionTitle}
               </h2>
-              <p className='mt-2 text-lg leading-8 text-gray-600'>
-                {sectionDescription}
-              </p>
+
             </div>
-            <div className='mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3'>
+            <div className='mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-8 border-t border-gray-200 pt-10 sm:mt-8 sm:pt-8 lg:mx-0 lg:max-w-none lg:grid-cols-3'>
               {blogs?.map((blog) => (
                 <Link
                   key={blog.post_id}
                   href={`/blogs/${blog.author}/${blog.permlink}`}
                 >
-                  <BlogCard blog={blog} sectionTitle={sectionTitle} />
+                  <BlogCard blog={blog} />
                 </Link>
               ))}
             </div>
