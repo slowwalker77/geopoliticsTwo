@@ -108,7 +108,7 @@ export default function BlogList({ tag, sectionTitle, sectionDescription }) {
         );
       }
     },
-    [tag]
+  [blogs]
   );
 
   useEffect(() => {
