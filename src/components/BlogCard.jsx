@@ -1,4 +1,4 @@
-import { sanitizeTitle, escapeHtml } from '@/utils/security';
+import { sanitizeTitle } from '@/utils/security';
 
 export default function BlogCard({
   blog: { title, created, body, author, json_metadata },

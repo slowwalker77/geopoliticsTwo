@@ -12,19 +12,25 @@ export const sanitizeContent = (content) => {
 
   // 브라우저 환경에서만 DOMPurify 사용
   if (typeof window !== 'undefined') {
-    return DOMPurify.sanitize(content, {
-      ALLOWED_TAGS: [
-        'p', 'br', 'strong', 'em', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
-        'ul', 'ol', 'li', 'blockquote', 'code', 'pre', 'a', 'img'
-      ],
-      ALLOWED_ATTR: {
-        'a': ['href', 'title'],
-        'img': ['src', 'alt', 'title', 'width', 'height'],
-        'code': ['class'],
-        'pre': ['class']
-      },
-      ALLOWED_URI_REGEXP: /^(?:(?:https?|ftp):\/\/|data:image\/)/i
-    });
+    try {
+      return DOMPurify.sanitize(content, {
+        ALLOWED_TAGS: [
+          'p', 'br', 'strong', 'em', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+          'ul', 'ol', 'li', 'blockquote', 'code', 'pre', 'a', 'img'
+        ],
+        ALLOWED_ATTR: {
+          'a': ['href', 'title'],
+          'img': ['src', 'alt', 'title', 'width', 'height'],
+          'code': ['class'],
+          'pre': ['class']
+        },
+        ALLOWED_URI_REGEXP: /^(?:(?:https?|ftp):\/\/|data:image\/)/i
+      });
+    } catch (error) {
+      console.warn('DOMPurify sanitization failed:', error);
+      // DOMPurify 실패 시 기본 HTML 태그 제거로 폴백
+      return content.replace(/<[^>]*>/g, '');
+    }
   }
   
   // 서버 사이드에서는 기본적인 HTML 태그 제거
@@ -82,9 +88,24 @@ export const escapeHtml = (text) => {
     return '';
   }
   
-  const div = document.createElement('div');
-  div.textContent = text;
-  return div.innerHTML;
+  // 브라우저 환경에서만 DOM 사용
+  if (typeof window !== 'undefined') {
+    try {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    } catch (error) {
+      console.warn('HTML escape failed:', error);
+    }
+  }
+  
+  // 서버 사이드 또는 DOM 실패 시 기본 이스케이프
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 };
 
 /**

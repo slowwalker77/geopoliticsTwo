@@ -52,8 +52,9 @@ export default function MarkDownViewer({ content }) {
                 alt={imageAlt.substring(0, 100)} // alt 텍스트 길이 제한
                 width={500}
                 height={350}
-                onError={(e) => {
-                  e.target.style.display = 'none';
+                onError={() => {
+                  // 이미지 로드 실패 시 처리
+                  console.warn('Failed to load image:', imageUrl);
                 }}
               />
             );
