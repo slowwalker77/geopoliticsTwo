@@ -7,30 +7,62 @@ import { Separator } from '@/components/ui/separator';
 import Container from '@/components/ui/container';
 import ArticleCard from '@/components/ArticleCard';
 import { steemitService } from '@/services/steemitService';
+import { featuredArticlesService } from '@/services/featuredArticlesService';
 import { ProcessedArticle } from '@/types/steemit';
+import { ProcessedArticleWithTheme } from '@/types/featured';
 import { categories, authors } from '@/data/categories';
-import { ArrowRight, BookOpen, Users, Globe } from 'lucide-react';
+import { ArrowRight, BookOpen, Users, Globe, AlertCircle } from 'lucide-react';
 
 export default function HomePage() {
-  const [featuredArticles, setFeaturedArticles] = useState<ProcessedArticle[]>([]);
+  const [featuredArticles, setFeaturedArticles] = useState<ProcessedArticleWithTheme[]>([]);
   const [recentArticles, setRecentArticles] = useState<ProcessedArticle[]>([]);
   const [loading, setLoading] = useState(true);
+  const [featuredLoading, setFeaturedLoading] = useState(true);
+  const [featuredError, setFeaturedError] = useState<string | null>(null);
+  const [usingFallback, setUsingFallback] = useState(false);
 
   useEffect(() => {
     const fetchArticles = async () => {
       try {
         setLoading(true);
+        setFeaturedLoading(true);
+        setFeaturedError(null);
+        setUsingFallback(false);
         
-        // 모든 작가들의 최신 글을 가져오기
+        // 주요글 불러오기
+        let featuredArticlesData: ProcessedArticleWithTheme[] = [];
+        try {
+          featuredArticlesData = await featuredArticlesService.loadFeaturedArticles();
+          
+          // isFeatured: true가 없는 게시글을 사용하고 있는지 확인
+          const hasExplicitlyFeatured = featuredArticlesData.some(article => article.isFeatured === true);
+          if (!hasExplicitlyFeatured && featuredArticlesData.length > 0) {
+            setUsingFallback(true);
+          }
+          
+          setFeaturedArticles(featuredArticlesData);
+        } catch (error) {
+          console.error('Failed to load featured articles:', error);
+          setFeaturedError(error instanceof Error ? error.message : 'Unknown error occurred');
+          setUsingFallback(true);
+          
+          // 추천 기사 서비스가 완전히 실패할 경우 자동 선택으로 대체
+          featuredArticlesData = [];
+        } finally {
+          setFeaturedLoading(false);
+        }
+        
+        // 최근 글 조회
         const allPosts: any[] = [];
         
-        // 각 작가별로 최신 글 3개씩 가져오기
+        // 각 작가별로 최신 글 가져오기
         for (const author of authors) {
           try {
             const posts = await steemitService.getPostsByAuthor({
               author: author.username,
-              limit: 3
+              limit: 3 // 최근 글 조회 개수 (카테고리 별)
             });
+            
             allPosts.push(...posts);
           } catch (error) {
             console.warn(`Failed to fetch posts for ${author.username}:`, error);
@@ -53,10 +85,25 @@ export default function HomePage() {
           return steemitService.processArticle(post, categoryName);
         });
 
-        setFeaturedArticles(processedArticles.slice(0, 3));
-        setRecentArticles(processedArticles.slice(3, 9));
+        // 주요글일 로드되지 않은 경우 3개의 기사 랜덤 
+        if (featuredArticlesData.length === 0) {
+          const fallbackFeatured = processedArticles.slice(0, 3).map((article, index) => ({
+            ...article,
+            isFeatured: false, // Mark as fallback, not explicitly featured
+            featuredPriority: index + 1,
+            visualTheme: undefined
+          }));
+          setFeaturedArticles(fallbackFeatured);
+          setUsingFallback(true);
+          setRecentArticles(processedArticles.slice(3, 9));
+        } else {
+          // 최근 글 6개 로드
+          setRecentArticles(processedArticles.slice(0, 6));
+        }
+        
       } catch (error) {
         console.error('Failed to fetch articles:', error);
+        setFeaturedError('글을 불러오는 중 오류가 발생했습니다.');
       } finally {
         setLoading(false);
       }
@@ -137,17 +184,42 @@ export default function HomePage() {
           <Container>
             <div className="space-y-8">
               <div className="text-center space-y-4">
-                <h2 className="text-3xl font-bold">주요 글</h2>
+                <div className="flex items-center justify-center space-x-2">
+                  <h2 className="text-3xl font-bold">주요 글</h2>
+                  {usingFallback && (
+                    <div className="flex items-center space-x-1 text-sm text-muted-foreground">
+                      <AlertCircle className="h-4 w-4" />
+                      <span>자동 선별</span>
+                    </div>
+                  )}
+                </div>
                 <p className="text-muted-foreground max-w-2xl mx-auto">
-                  최신 정치 분석과 국제 정세에 대한 깊이 있는 통찰
+                  {usingFallback 
+                    ? '설정된 주요 글이 없어 최신 글을 자동으로 선별했습니다'
+                    : '최신 정치 분석과 국제 정세에 대한 깊이 있는 통찰'
+                  }
                 </p>
+                {featuredError && (
+                  <div className="flex items-center justify-center space-x-2 text-sm text-destructive bg-destructive/10 rounded-lg p-3 max-w-md mx-auto">
+                    <AlertCircle className="h-4 w-4" />
+                    <span>{featuredError}</span>
+                  </div>
+                )}
               </div>
               
-              <div className="magazine-grid">
-                {featuredArticles.map((article) => (
-                  <ArticleCard key={article.id} article={article} featured />
-                ))}
-              </div>
+              {featuredLoading ? (
+                <div className="magazine-grid">
+                  {[...Array(3)].map((_, i) => (
+                    <ArticleCard key={i} article={{} as ProcessedArticle} loading />
+                  ))}
+                </div>
+              ) : (
+                <div className="magazine-grid">
+                  {featuredArticles.map((article) => (
+                    <ArticleCard key={article.id} article={article} featured />
+                  ))}
+                </div>
+              )}
             </div>
           </Container>
         </section>
@@ -228,13 +300,7 @@ export default function HomePage() {
               </div>
               <div className="magazine-grid">
                 {[...Array(6)].map((_, i) => (
-                  <div key={i} className="animate-pulse space-y-4">
-                    <div className="h-48 bg-muted rounded"></div>
-                    <div className="space-y-2">
-                      <div className="h-4 bg-muted rounded"></div>
-                      <div className="h-4 bg-muted rounded w-3/4"></div>
-                    </div>
-                  </div>
+                  <ArticleCard key={i} article={{} as ProcessedArticle} loading />
                 ))}
               </div>
             </div>

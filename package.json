@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
@@ -40,13 +43,18 @@
     "zod": "^4.2.1"
   },
   "devDependencies": {
+    "@fast-check/jest": "^2.1.1",
+    "@types/jest": "^30.0.0",
     "@types/node": "20.10.5",
     "@types/react": "18.2.45",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "^14.1.0",
+    "fast-check": "^4.5.2",
+    "jest": "^30.2.0",
     "postcss": "^8",
     "tailwindcss": "^3.3.0",
+    "ts-jest": "^29.4.6",
     "typescript": "^5.9.3"
   }
 }

@@ -37,6 +37,13 @@ export const categories: ArticleCategory[] = [
 // Steemit 사용자명을 사용
 export const authors = [
   {
+    username: 'section-0', // Steemit 사용자명
+    displayName: '한설',
+    description: '예비역 장군, 전 육군역사연구소장',
+    specialties: ['국제정치', '지정학', '한반도 문제'],
+    primaryCategory: 'domestic' // 주요 카테고리 연결
+  },
+  {
     username: 'section-1', // Steemit 사용자명
     displayName: '한설',
     description: '예비역 장군, 전 육군역사연구소장',

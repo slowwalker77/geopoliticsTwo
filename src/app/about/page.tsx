@@ -232,8 +232,9 @@ export default function AboutPage() {
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg">
-                <Link href="/authors">
-                  작가 소개 보기
+                <Link href="https://t.me/+y2DZV9wv1r5lNzU1" 
+                    target="_blank" >
+                  텔레그램 [우리 스스로 주인되는 세상] 가입
                 </Link>
               </Button>
             </div>
