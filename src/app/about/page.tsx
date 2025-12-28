@@ -25,7 +25,7 @@ export default function AboutPage() {
             <h2 className="text-2xl font-bold text-center">사이트의 목적</h2>
             <div className="prose prose-lg max-w-none text-center">
               <p className="text-lg leading-relaxed">
-                "대한민국의 바람직한 미래를 위한 고민을 찾아서"
+                대한민국의 바람직한 미래를 위한 고민을 찾아서
               </p>
               <p className="text-muted-foreground">
                 우리는 복잡한 국제정치와 지정학적 변화 속에서 한국이 나아가야 할 방향을 모색합니다. 
@@ -180,10 +180,20 @@ export default function AboutPage() {
           <section className="bg-muted/50 rounded-lg p-8 space-y-6">
             <h2 className="text-2xl font-bold text-center">역사적 성찰</h2>
             <div className="prose prose-lg max-w-none">
-              <blockquote className="text-lg italic text-center border-l-4 border-primary pl-6">
-                "무엇을 고민할 것인가? 노태우의 공약은 작전권전환과 200만호 건설이었다. 
-                정주영의 공약은 토지공개념이었다. 그동안 우리는 무엇을 했는가? 
-                전진했는가? 아니면 후퇴했는가?"
+              <blockquote className="text-lg italic border-l-4 border-primary pl-6">
+                대한민국의 바람직한 미래를 위한 고민을 찾아서<br/>
+
+                무엇을 고민할 것인가?<br/>
+                노태우의 공약은 작전권전환과 200만호 건설이었다.<br/>
+                정주영의 공약은 토지공개념 이었다.<br/>
+                우리는 그동안 무엇을 했는가?<br/>
+                전진했는가? 후퇴했는가?<br/>
+                2030을 위한 100만호 임대주택 건설은 불가능한가<br/>
+                남북 평화협정체결로 평화를 지킬 수 있다.<br/>
+                한반도 안보의 한국화가 되어야 자주적인 된다.<br/>
+                인문지리적 억제로 한반도에서 전쟁을 막을 수 있다.<br/>
+                변화하는 국제정치에 능동적으로 대응하기 위한 노동과 자본의 동맹은 불가능한가?<br/>
+                모두 다 같이 사는 공동체적 삶을 만들어 가자.
               </blockquote>
               <p className="text-muted-foreground text-center mt-4">
                 과거의 약속과 현재의 현실을 비교하며, 진정한 발전의 방향을 모색합니다.
