@@ -52,11 +52,11 @@ export default function Footer() {
                   사이트 소개
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link href="/authors" className="text-muted-foreground hover:text-foreground transition-colors">
                   작가 소개
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link href="/contact" className="text-muted-foreground hover:text-foreground transition-colors">
                   연락처
@@ -66,7 +66,7 @@ export default function Footer() {
           </div>
 
           {/* External Links */}
-          <div className="space-y-4">
+          {/* <div className="space-y-4">
             <h4 className="text-sm font-semibold">외부 링크</h4>
             <ul className="space-y-2 text-sm">
               <li>
@@ -90,7 +90,7 @@ export default function Footer() {
                 </a>
               </li>
             </ul>
-          </div>
+          </div> */}
         </div>
 
         <Separator className="my-8" />

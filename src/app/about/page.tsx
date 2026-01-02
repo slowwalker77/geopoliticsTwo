@@ -252,18 +252,17 @@ export default function AboutPage() {
 
           {/* Contact Information */}
           <section className="text-center space-y-4">
-            <h3 className="text-xl font-semibold">연락처</h3>
             <p className="text-muted-foreground">
               의견이나 제안사항이 있으시면 언제든 연락해 주세요.
             </p>
             <div className="flex justify-center space-x-4">
               <Button asChild variant="outline">
                 <a 
-                  href="https://steemit.com/@nalutbae" 
+                  href="/contact" 
                   target="_blank" 
                   rel="noopener noreferrer"
                 >
-                  Steemit에서 소통하기
+                  연락처
                 </a>
               </Button>
             </div>

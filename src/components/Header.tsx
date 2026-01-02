@@ -31,12 +31,12 @@ export default function Header() {
               {category.name}
             </Link>
           ))}
-          <Link
+          {/* <Link
             href="/authors"
             className="text-sm font-medium transition-colors hover:text-primary"
           >
             작가
-          </Link>
+          </Link> */}
           <Link
             href="/about"
             className="text-sm font-medium transition-colors hover:text-primary"

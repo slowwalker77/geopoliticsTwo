@@ -135,7 +135,7 @@ export default function ArticlePage() {
             </div>
 
             {/* Stats */}
-            <div className="flex items-center space-x-6 text-sm text-muted-foreground">
+            {/* <div className="flex items-center space-x-6 text-sm text-muted-foreground">
               <div className="flex items-center space-x-2">
                 <Heart className="h-4 w-4" />
                 <span>{article.votes} 좋아요</span>
@@ -155,7 +155,7 @@ export default function ArticlePage() {
                   <span>Steemit에서 보기</span>
                 </a>
               </Button>
-            </div>
+            </div> */}
 
             {/* Featured Image */}
             {article.imageUrl && (
@@ -206,7 +206,7 @@ export default function ArticlePage() {
             )}
 
             {/* Author Info */}
-            <div className="bg-muted/50 rounded-lg p-6 space-y-4">
+            {/* <div className="bg-muted/50 rounded-lg p-6 space-y-4">
               <div className="flex items-center space-x-4">
                 <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
                   <User className="h-6 w-6 text-primary" />
@@ -233,7 +233,7 @@ export default function ArticlePage() {
                   </a>
                 </Button>
               </div>
-            </div>
+            </div> */}
 
             {/* Navigation */}
             <div className="flex justify-between">

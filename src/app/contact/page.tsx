@@ -27,9 +27,9 @@ export default function ContactPage() {
 
           {/* Contact Methods */}
           <section className="space-y-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-1 gap-6">
               {/* Steemit Contact */}
-              <div className="bg-card rounded-lg border p-6 space-y-4">
+              {/* <div className="bg-card rounded-lg border p-6 space-y-4">
                 <div className="flex items-center space-x-3">
                   <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
                     <MessageCircle className="h-6 w-6 text-primary" />
@@ -52,7 +52,7 @@ export default function ContactPage() {
                     <ExternalLink className="ml-2 h-4 w-4" />
                   </a>
                 </Button>
-              </div>
+              </div> */}
 
               {/* General Inquiry */}
               <div className="bg-card rounded-lg border p-6 space-y-4">
